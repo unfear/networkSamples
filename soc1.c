@@ -8,10 +8,10 @@
 
 int main()
 {
-    int port = 2049;
+    int port = 13;
     struct sockaddr_in dest;
- //   char * host = "127.0.0.1";
-    char * host = "106.125.34.15";
+    char * host = "127.0.0.1";
+    //char * host = "106.125.34.15";
 
     int sd = socket(PF_INET, SOCK_STREAM, 0);
     printf("Socket descriptor: %d\n", sd);
@@ -21,7 +21,7 @@ int main()
     dest.sin_port = htons(port);
     inet_aton(host, &dest.sin_addr);
 
-    if(connect(sd, &dest, sizeof(dest)) != 0)
+    if(connect(sd, (struct sockaddr *)&dest, sizeof(dest)) != 0)
     {
         printf("Error Socket connection\n");
         close(sd);
