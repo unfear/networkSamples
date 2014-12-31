@@ -6,9 +6,9 @@
 
 #include <memory.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-    int port = 13;
+    int port = 9999;
     struct sockaddr_in dest;
     char * host = "127.0.0.1";
     //char * host = "106.125.34.15";
@@ -29,7 +29,10 @@ int main()
     }
     
     char buf[] = "Hello";
-    send(sd, buf, strlen(buf), 0);
+    if(argc > 1)
+        send(sd, argv[1], strlen(argv[1]), 0);
+    else
+        send(sd, buf, strlen(buf), 0);
 
     char newBuf[100];
     memset(newBuf, 0, sizeof(newBuf));
